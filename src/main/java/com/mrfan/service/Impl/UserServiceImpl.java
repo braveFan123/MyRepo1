@@ -13,7 +13,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User queryById(Integer id) {
-        return userDao.queryById(id);
+    public String userLogin(Integer id, String password) {
+        User user = userDao.queryById(id);
+        System.out.println(user);
+        if (user == null) {
+            return "UserLogin";
+        } else if (user.getId().equals(id) && user.getPassword().equals(password)) {
+            return "UserCenter";
+        } else {
+            return "UserLogin";
+        }
     }
 }

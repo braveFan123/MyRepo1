@@ -1,5 +1,6 @@
 package com.mrfan.controller;
 
+import com.mrfan.model.User;
 import com.mrfan.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +22,18 @@ public class UserController {
     public String toLogin(Model model, String id) {
         return "UserLogin";
     }
+
     @RequestMapping(value = "/toRegister", method = RequestMethod.GET)
     public String toRegister(Model model, String id) {
         return "UserRegister";
     }
+
     @RequestMapping(value = "/queryById", method = RequestMethod.POST)
-    public String queryById(Model model, String id) {
-        return "";
+    public String queryById(Model model, String id,String password) {
+        int userId = Integer.parseInt(id);
+        String next =userService.userLogin(userId,password);
+
+        model.addAttribute("");
+        return next;
     }
 }
